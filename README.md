@@ -6,7 +6,7 @@
 	
 # Compile and run HRM server
 **First you need to clone this git :**
-*  https: //gitedu.hesge.ch/osvaldo.pintodeo/hepia_resource_manager_server.git
+*  git clone https: //gitedu.hesge.ch/osvaldo.pintodeo/hepia_resource_manager_server.git
  
 **Then in the project folder execute the followings commands:**
 * mvn package
