@@ -3,9 +3,9 @@ import java.util.List;
 import java.util.SplittableRandom;
 
 public class Reservation {
-    private Integer ID;
+    private Integer id;
     private String name;
-    private List<String> resource_list;
+    private List<String> resourceList;
     private Date start;
     private Date end;
 
@@ -13,21 +13,21 @@ public class Reservation {
 
     public Reservation(String name, List<String> resources, Date start, Date end){
         this.name = name;
-        this.resource_list = resources;
+        this.resourceList = resources;
         this.start = start;
         this.end = end;
     }
 
     public Integer getID(){
-        Integer i = this.ID;
+        Integer i = this.id;
         return i;
     }
     public String getName(){
         String n = this.name;
         return n;
     }
-    public List<String>getResource_list(){
-        List<String> l = this.resource_list;
+    public List<String>getResourceList(){
+        List<String> l = this.resourceList;
         return l;
     }
     public Date getStart(){
@@ -40,8 +40,9 @@ public class Reservation {
     }
 
     public void setResource_list(List<String> l){
-        this.resource_list = l;
+        this.resourceList = l;
     }
+    public void setID(Integer id){this.id = id;}
 
 
 }

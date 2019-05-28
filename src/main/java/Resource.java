@@ -1,26 +1,39 @@
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
 public class Resource {
     //Random rand = new Random();
-    public Integer ID;
+    public Integer id;
     public String name;
-    public String TypeName;
-    //public HashMap<String, Serializable> caracteristics;
-    //public Integer GroupID;
-    //public String GroupName;
+    public String typeName;
+    public HashMap<String, String> caracteristics;
+    //public Integer groupID;
+    //public String groupName;
 
     public Resource(){}
 
     public Resource(String name, String TypeName){
-        this.ID = 1; //rand.nextInt(10000-0) + 1;
+        this.id = 1;
         this.name = name;
-        this.TypeName = TypeName;
-        //this.GroupName = GroupName;
-        //this.caracteristics = Create_Carac();
-        //this.GroupID = Find_GroupID(GroupName);
+        this.typeName = TypeName;
+    }
 
+    public Resource(String name, String typeName, HashMap<String,String> caracteristics){
+        this.name = name;
+        this.typeName = typeName;
+        this.caracteristics = caracteristics;
+    }
+
+    public Resource(String name, String TypeName, ArrayList<String> l){
+
+    }
+
+    HashMap<String,String> getCaracteristics(){
+        HashMap<String,String> tmp = new HashMap<>();
+        tmp = this.caracteristics;
+        return tmp;
     }
 
     public String getName(){
@@ -28,17 +41,12 @@ public class Resource {
         return r;
     }
 
-    Integer Find_GroupID(String GroupName){
-       //Request group id in database with group name
-       //if not exist add groupname to database.
-       //Return ID created for groupname
+    Integer findGroupID(String GroupName){
        return 0;
     }
 
-    HashMap Create_Carac(){
-        HashMap<String,String> carac = new HashMap<>();
-        //Feed the hashmap EXEMPLE : carac.put("projecteur","oui");
-        return carac;
-    }
+
+
+    public void setID(Integer id){this.id = id;}
 
 }
