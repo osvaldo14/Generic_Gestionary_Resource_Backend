@@ -5,6 +5,6 @@ public interface InterfaceDbResource {
     List<Resource> getDb();
     Map<String,List<Resource>> getResourceByTypeList();
     void addResource(Resource r);
-    void deleteResource(Resource r);
+    void deleteResource(String resourceName);
     void modifyResource(Resource r);
 }

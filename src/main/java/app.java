@@ -48,6 +48,10 @@ public class app {
             ctx.json(resources_name);
         });
 
+        app.get("/resources",  ctx -> {
+            ctx.json(db.getDb());
+        });
+
         app.get("/resourcebytype", ctx ->{
             Map<String, List<String>> ResourceByType = db.getResourceByTypeList().entrySet().stream().collect(Collectors.toMap(
                     tpl -> tpl.getKey(),
@@ -85,8 +89,7 @@ public class app {
 
         app.get("gtypes", ctx->{
             List<String> typesNames = new ArrayList<>();
-            List<ResourceType> l = new ArrayList<>();
-            l = db.getAllTypes();
+            List<ResourceType> l = db.getAllTypes();
             l.forEach((n) -> typesNames.add(n.getName()));
             ctx.json(l);
         });
@@ -94,6 +97,18 @@ public class app {
         app.post("/deletereservation", ctx->{
             System.out.println(ctx.body());
             db.findAndDeleteReservation(ctx.body());
+        });
+
+        app.post("/deleteresource", ctx->{
+            db.deleteResource(ctx.body());
+        });
+
+        app.get("/conflict", ctx->{
+           /*List<String> conflictList = db.reservationNames();
+           ctx.json(conflictList);*/
+           InMemoryDataBase tmpDatabase = db;
+           ConflictHandler conflictHandler = new ConflictHandler();
+           ctx.json(conflictHandler.naiveConflictDetection(db));
         });
     }
 }

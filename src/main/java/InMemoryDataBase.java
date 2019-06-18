@@ -36,7 +36,7 @@ public class InMemoryDataBase implements InterfaceDbResource, InterfaceDbReserva
 
     public List<Resource> getDb(){
         List<Resource> r = this.db;
-        return r;
+        return new ArrayList<>(r);
     }
 
     public Map<String, List<Resource>> getResourceByTypeList(){
@@ -50,7 +50,9 @@ public class InMemoryDataBase implements InterfaceDbResource, InterfaceDbReserva
         this.db.add(r);
     }
 
-    public void deleteResource(Resource r){}
+    public void deleteResource(String resourceName){
+        this.db.removeIf(r -> r.getName().equals(resourceName));
+    }
 
     public void modifyResource(Resource r ){}
 
@@ -62,7 +64,7 @@ public class InMemoryDataBase implements InterfaceDbResource, InterfaceDbReserva
     }
     public List<Reservation> getReservationList(){
         List<Reservation> l = this.dbReservation;
-        return l;
+        return new ArrayList<>(l);
     }
     public void addReservation(Reservation r){
         this.dbReservation.add(r);
@@ -78,6 +80,11 @@ public class InMemoryDataBase implements InterfaceDbResource, InterfaceDbReserva
         this.dbReservation.removeIf(r -> r.getName().equals(name));
     }
 
+    public List<String> reservationNames(){
+        List<String> l = new ArrayList<>();
+        this.dbReservation.forEach((r) -> l.add(r.getName()));
+        return l;
+    }
 
     /* METHODS FOR DATABASE RESOURCETYPE */
 
