@@ -1,6 +1,5 @@
-import java.util.Date;
-import java.util.List;
-import java.util.SplittableRandom;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class Reservation {
     private Integer id;
@@ -12,6 +11,8 @@ public class Reservation {
     public Reservation(){}
 
     public Reservation(String name, List<String> resources, Date start, Date end){
+        SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.ENGLISH);
+        s.setTimeZone(TimeZone.getTimeZone("GMT"));
         this.name = name;
         this.resourceList = resources;
         this.start = start;

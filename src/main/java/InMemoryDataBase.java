@@ -64,6 +64,7 @@ public class InMemoryDataBase implements InterfaceDbResource, InterfaceDbReserva
     }
     public List<Reservation> getReservationList(){
         List<Reservation> l = this.dbReservation;
+        l.forEach((r) -> System.out.println(r.getStart().getTime()));
         return new ArrayList<>(l);
     }
     public void addReservation(Reservation r){
@@ -76,8 +77,8 @@ public class InMemoryDataBase implements InterfaceDbResource, InterfaceDbReserva
 
     public void modifyReservation(Reservation r){}
 
-    public void findAndDeleteReservation(String name){
-        this.dbReservation.removeIf(r -> r.getName().equals(name));
+    public void findAndDeleteReservation(Integer id){
+        this.dbReservation.removeIf(r -> r.getID().equals(id));
     }
 
     public List<String> reservationNames(){

@@ -72,6 +72,7 @@ public class app {
             ObjectMapper mapper = new ObjectMapper();
             mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
             Reservation r = mapper.readValue(ctx.body(), Reservation.class);
+            System.out.println(r.getStart());
             r.setID(idReservation);
             idReservation += 1;
             db.addReservation(r);
@@ -96,7 +97,8 @@ public class app {
 
         app.post("/deletereservation", ctx->{
             System.out.println(ctx.body());
-            db.findAndDeleteReservation(ctx.body());
+            if(ctx.body().equals("")) System.out.println("Suppression d'une réservation non existante");
+            else db.findAndDeleteReservation(Integer.valueOf(ctx.body()));
         });
 
         app.post("/deleteresource", ctx->{

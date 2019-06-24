@@ -20,8 +20,8 @@ public class ConflictHandler {
         db.getReservationList().forEach((reservation -> {
             System.out.println("On est entrain de comparer ..."+ reservation.getName());
             //Check si la réservation qu'on souhaite comparée n'est pas déjà dans la liste de conflits auquel cas pas besoin de la comparer.
-            if (this.conflicts.contains(reservation.getName())){
-                System.out.println(reservation.getName() + "est deja dans la liste des conflits");
+            if (this.conflicts.contains(reservation.getID())){
+                System.out.println(reservation.getID() + "est deja dans la liste des conflits");
             }else{
 
                 //CONFLICT DETECTION : on ne garde que les réservations problématiques
