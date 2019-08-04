@@ -40,6 +40,18 @@ public class Reservation {
         return d;
     }
 
+    public void updateReservation(Date newStart, Date newEnd){
+        this.start = newStart;
+        this.end = newEnd;
+    }
+
+    public void updateReservation(Date newStart, Date newEnd, String name, List<String> resources) {
+        this.name = name;
+        this.resourceList = resources;
+        this.start = newStart;
+        this.end = newEnd;
+    }
+
     public void setResource_list(List<String> l){
         this.resourceList = l;
     }

@@ -9,10 +9,7 @@ import io.javalin.Javalin;
 
 import java.io.File;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import io.javalin.security.Role;
@@ -22,6 +19,7 @@ import javalinjwt.JWTProvider;
 import javalinjwt.JavalinJWT;
 import javalinjwt.examples.JWTResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONObject;
 
 import static io.javalin.security.SecurityUtil.roles;
 
@@ -73,6 +71,7 @@ public class app {
             mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
             Reservation r = mapper.readValue(ctx.body(), Reservation.class);
             System.out.println(r.getStart());
+            System.out.println(ctx.body());
             r.setID(idReservation);
             idReservation += 1;
             db.addReservation(r);
@@ -106,11 +105,21 @@ public class app {
         });
 
         app.get("/conflict", ctx->{
-           /*List<String> conflictList = db.reservationNames();
-           ctx.json(conflictList);*/
            InMemoryDataBase tmpDatabase = db;
            ConflictHandler conflictHandler = new ConflictHandler();
-           ctx.json(conflictHandler.naiveConflictDetection(db));
+           ctx.json(conflictHandler.ConflictDetection(db));
+        });
+
+        app.post("modifyreservation", ctx-> {
+            System.out.println(ctx.body());
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+            ReservationUpdates updates = mapper.readValue(ctx.body(),ReservationUpdates.class);
+            if (updates.getName().equals("not modified")){
+                db.modifyReservation(updates.getReservationID(),updates.getStart(),updates.getEnd());
+            }else {
+                db.modifyReservation(updates.getReservationID(),updates.getStart(),updates.getEnd(), updates.getName(), updates.getResources());
+            }
         });
     }
 }

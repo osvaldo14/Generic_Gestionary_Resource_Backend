@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class InMemoryDataBase implements InterfaceDbResource, InterfaceDbReservation, InterfaceDbType {
@@ -12,9 +9,21 @@ public class InMemoryDataBase implements InterfaceDbResource, InterfaceDbReserva
 
     public InMemoryDataBase(){
         //Create resource
-        Resource Cavat = new Resource("Joel Cavat", "Professeur");
-        Resource A406 = new Resource("A406","Salle");
-        Resource Gluck = new Resource("Florent Gluck", "Professeur");
+        HashMap<String, String> cavatCarac = new HashMap<>();
+        cavatCarac.put("nom", "Cavat");
+        cavatCarac.put("âge","30");
+        cavatCarac.put("Doctorat","Oui");
+        HashMap<String, String> gluckCarac = new HashMap<>();
+        gluckCarac.put("nom", "Gluck");
+        gluckCarac.put("âge","35");
+        gluckCarac.put("Doctorat","Oui");
+        HashMap<String, String> A406Carac = new HashMap<>();
+        A406Carac.put("Nombre de place", "50");
+        A406Carac.put("étage","4");
+        A406Carac.put("Bimeur","Oui");
+        Resource Cavat = new Resource("Joel Cavat", "Professeur", cavatCarac);
+        Resource A406 = new Resource("A406","Salle", A406Carac);
+        Resource Gluck = new Resource("Florent Gluck", "Professeur", gluckCarac);
         this.db.add(Cavat);
         this.db.add(A406);
         this.db.add(Gluck);
@@ -26,10 +35,10 @@ public class InMemoryDataBase implements InterfaceDbResource, InterfaceDbReserva
         h.put("Doctorat","bool");
         ResourceType t = new ResourceType("Professeur",h);
         HashMap<String,String> h2 = new HashMap<>();
-        h2.put("Nombre bouteille", "Int");
-        h2.put("âge","int");
-        h2.put("Fruit principal","String");
-        ResourceType t2 = new ResourceType("Vin",h2);
+        h2.put("Nombre de place", "Int");
+        h2.put("étage","int");
+        h2.put("Bimeur","bool");
+        ResourceType t2 = new ResourceType("Salle",h2);
         this.dbType.add(t);
         this.dbType.add(t2);
     }
@@ -54,7 +63,9 @@ public class InMemoryDataBase implements InterfaceDbResource, InterfaceDbReserva
         this.db.removeIf(r -> r.getName().equals(resourceName));
     }
 
-    public void modifyResource(Resource r ){}
+    public void modifyResource(Resource r ){
+
+    }
 
     /* METHODS FOR DATABASE RESERVATION */
 
@@ -64,7 +75,6 @@ public class InMemoryDataBase implements InterfaceDbResource, InterfaceDbReserva
     }
     public List<Reservation> getReservationList(){
         List<Reservation> l = this.dbReservation;
-        l.forEach((r) -> System.out.println(r.getStart().getTime()));
         return new ArrayList<>(l);
     }
     public void addReservation(Reservation r){
@@ -75,7 +85,12 @@ public class InMemoryDataBase implements InterfaceDbResource, InterfaceDbReserva
         this.dbReservation.remove(r);
     }
 
-    public void modifyReservation(Reservation r){}
+    public void modifyReservation(Integer id, Date newStart, Date newEnd){
+        this.dbReservation.get(id).updateReservation(newStart, newEnd);
+    }
+    public void modifyReservation(Integer id, Date newStart, Date newEnd, String name, List<String> resources){
+        this.dbReservation.get(id).updateReservation(newStart, newEnd, name, resources);
+    }
 
     public void findAndDeleteReservation(Integer id){
         this.dbReservation.removeIf(r -> r.getID().equals(id));

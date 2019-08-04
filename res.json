@@ -1,1 +1,6 @@
-{"id":0,"name":"New event","resourceList":["Joel Cavat","A406"],"start":1558396800000,"end":1558483140000}
+
+
+
+
+
+{"type":"Avion","name":"B300","caracteristics":[{"Nombre de place" : "300"},{"Pilote": "John Doe"}]}
