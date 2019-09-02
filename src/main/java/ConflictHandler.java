@@ -90,9 +90,9 @@ public class ConflictHandler {
                             if (compareResources(r1,r2)){
                                 //Permet d'ajouter r1 aux conflit qu'une seul fois
                                 if (this.conflicts.contains(r1.getID())){
-                                    this.conflicts.add(r1.getID().toString());
                                     this.conflicts.add(r2.getID().toString());
                                 }else {
+                                    this.conflicts.add(r1.getID().toString());
                                     this.conflicts.add(r2.getID().toString());
                                 }
                             }
