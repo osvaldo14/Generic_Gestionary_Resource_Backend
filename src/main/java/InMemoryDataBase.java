@@ -10,17 +10,17 @@ public class InMemoryDataBase implements InterfaceDbResource, InterfaceDbReserva
     public InMemoryDataBase(){
         //Create resource
         HashMap<String, String> cavatCarac = new HashMap<>();
-        cavatCarac.put("nom", "Cavat");
-        cavatCarac.put("âge","30");
+        cavatCarac.put("Nom", "Cavat");
+        cavatCarac.put("Âge","30");
         cavatCarac.put("Doctorat","Oui");
         HashMap<String, String> gluckCarac = new HashMap<>();
         gluckCarac.put("nom", "Gluck");
-        gluckCarac.put("âge","35");
+        gluckCarac.put("Âge","35");
         gluckCarac.put("Doctorat","Oui");
         HashMap<String, String> A406Carac = new HashMap<>();
         A406Carac.put("Nombre de place", "50");
-        A406Carac.put("étage","4");
-        A406Carac.put("Bimeur","Oui");
+        A406Carac.put("Étage","4");
+        A406Carac.put("Beameur","Oui");
         Resource Cavat = new Resource("Joel Cavat", "Professeur", cavatCarac);
         Resource A406 = new Resource("A406","Salle", A406Carac);
         Resource Gluck = new Resource("Florent Gluck", "Professeur", gluckCarac);
@@ -30,14 +30,14 @@ public class InMemoryDataBase implements InterfaceDbResource, InterfaceDbReserva
 
         //CreateResourceType
         HashMap<String,String> h = new HashMap<>();
-        h.put("nom", "String");
-        h.put("âge","int");
+        h.put("Nom", "String");
+        h.put("Âge","int");
         h.put("Doctorat","bool");
         ResourceType t = new ResourceType("Professeur",h);
         HashMap<String,String> h2 = new HashMap<>();
         h2.put("Nombre de place", "Int");
-        h2.put("étage","int");
-        h2.put("Bimeur","bool");
+        h2.put("Étage","int");
+        h2.put("Beameur","bool");
         ResourceType t2 = new ResourceType("Salle",h2);
         this.dbType.add(t);
         this.dbType.add(t2);
